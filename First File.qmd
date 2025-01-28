@@ -1,0 +1,23 @@
+```{r}
+#| include = FALSE
+library(tidyverse)
+library(palmerpenguins)
+```
+
+------------------------------------------------------------------------
+
+```{r}
+penguins |>  
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))+
+  geom_point(aes(colour=species)) +
+  labs(x = "Flipper Length (mm)", y = "Body Mass (g)", color = "Species") + 
+  scale_color_manual(labels = c(substitute(paste(italic("Adelie"))), substitute(paste(italic("Chinstrap"))), substitute(paste(italic("Gentoo")))), values = c("#1c8787","#d8b748",'#e39b44')) + 
+  theme_bw() +
+  theme(panel.border = element_rect(colour = "black"),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank()) +
+  geom_smooth(method="lm",
+              se=FALSE, 
+              aes(colour=species))
+```
